@@ -217,21 +217,4 @@ nnoremap <leader>e :e ~/buffer<cr>
 autocmd FileType python xmap <buffer> S <Plug>VgSurround
 autocmd FileType python xmap <buffer> s <Plug>VSurround
 
-function! MyIndent()
-  let prev = getline(v:lnum - 1)
-  let curr = getline(v:lnum)
-  if prev =~ '[:{]\s*$'
-    return indent(v:lnum - 1) + &shiftwidth
-  elseif curr =~ '^\s*}'
-    let lnum = v:lnum - 1
-    while lnum > 0
-      if getline(lnum) =~ '{\s*$'
-        return indent(lnum)
-      endif
-      let lnum -= 1
-    endwhile
-  endif
-  return indent(v:lnum - 1)
-endfunction
-
-autocmd FileType python set indentexpr=MyIndent()
+autocmd FileType python set indentexpr=
