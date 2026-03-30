@@ -216,3 +216,5 @@ nnoremap <leader>e :e ~/buffer<cr>
 
 autocmd FileType python xmap <buffer> S <Plug>VgSurround
 autocmd FileType python xmap <buffer> s <Plug>VSurround
+
+autocmd FileType python set indentexpr=getline(v:lnum-1)=~':\\s*$'?indent(v:lnum-1)+&shiftwidth:indent(v:lnum-1)
