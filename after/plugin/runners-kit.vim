@@ -166,7 +166,7 @@ endf
 vnoremap . :Commentary<cr>
 
 " ── vim-visual-multi ────────────────────────────────────────
-let g:VM_leader = '\'
+let g:VM_leader = '\\'
 let g:VM_maps = {}
 let g:VM_maps['Find Under'] = '<C-s>'
 let g:VM_maps['Find Subword Under'] = '<C-s>'
