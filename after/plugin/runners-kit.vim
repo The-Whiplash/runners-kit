@@ -1,3 +1,5 @@
+filetype plugin off
+
 let $LANG='en'
 
 set history=500
