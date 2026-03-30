@@ -1,6 +1,3 @@
-filetype plugin off
-filetype indent off
-
 let $LANG='en'
 
 set history=500
@@ -219,5 +216,3 @@ nnoremap <leader>e :e ~/buffer<cr>
 
 autocmd FileType python xmap <buffer> S <Plug>VgSurround
 autocmd FileType python xmap <buffer> s <Plug>VSurround
-
-autocmd FileType python set indentexpr=
