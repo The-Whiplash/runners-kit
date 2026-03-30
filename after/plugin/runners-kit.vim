@@ -64,6 +64,7 @@ set wrap
 
 " Auto indent. new lines inherit indentation of previous line
 set ai
+set smartindent
 
 " Remove highlighting
 nnoremap <silent> <leader>rh :noh<cr>
