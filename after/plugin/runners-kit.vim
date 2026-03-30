@@ -1,3 +1,4 @@
+filetype indent off
 filetype plugin off
 
 let $LANG='en'
