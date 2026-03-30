@@ -1,4 +1,3 @@
-
 let $LANG='en'
 
 set history=500
@@ -9,13 +8,9 @@ set wildignore=*.o,*~,*.pyc,.git/*
 set number
 set relativenumber
 
-if has ('termguicolors')
-	set termguicolors
-endif
-
 set fillchars+=eob:\
 
-set noruler 
+set noruler
 
 iab xdate <c-r>=strftime("%m/%d/%y %H:%M:%S")<cr>
 
@@ -35,7 +30,6 @@ set novisualbell
 set t_vb=
 
 " Vim doesn't force you to save / discard a buffer when working with multiple files
-
 set hid
 
 " Ignores case, overrides ignore case if case is present in search, highlights all search, and shows what you're searching before you press enter
@@ -43,9 +37,6 @@ set ignorecase
 set smartcase
 set hlsearch
 set incsearch
-
-" enable cursorline
-set cursorline
 
 " Pressing tab inserts actual tab instead of spaces, the tab displays as x columns wide, indentation commands shift by x columns, and pressing tab in insert moves the cursor x columns.
 set noexpandtab
@@ -73,7 +64,6 @@ set wrap
 
 " Auto indent. new lines inherit indentation of previous line
 set ai
-
 
 " Remove highlighting
 nnoremap <silent> <leader>rh :noh<cr>
@@ -109,8 +99,8 @@ endif
 
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
-map <leader>j :Files<cr>
-map <leader>k :Buffer<cr>
+noremap <leader>j :Files<cr>
+noremap <leader>k :Buffer<cr>
 nnoremap <leader>/ :Rg<Space>
 let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
@@ -127,9 +117,9 @@ endif
 let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden = 1
 let g:NERDTreeWinSize = 35
-map <leader>of :NERDTreeFind<cr>
-map <leader>ot :NERDTreeToggle<cr>
-map <leader>oc :NERDTreeClose<cr>
+noremap <leader>of :NERDTreeFind<cr>
+noremap <leader>ot :NERDTreeToggle<cr>
+noremap <leader>oc :NERDTreeClose<cr>
 
 " Exit Vim if NERDTree is the only window remaining
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
