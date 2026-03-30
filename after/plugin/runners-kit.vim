@@ -45,9 +45,9 @@ set shiftwidth=8
 set softtabstop=8
 
 " Sets tab spacing to other settings
-nnoremap <leader>ti :setglobal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
-nnoremap <leader>to :setglobal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-nnoremap <leader>tp :setglobal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8<CR>
+nnoremap <leader>ti :setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+nnoremap <leader>to :setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nnoremap <leader>tp :setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8<CR>
 
 " Use utf8 for encoding, use unix file system instead of windows
 set encoding=utf8
@@ -137,7 +137,6 @@ let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 nnoremap <leader>ig :IndentGuidesToggle<cr>
-
 "
 vnoremap <leader>? :Tabularize /
 vnoremap <leader>sm :sort<cr>
@@ -179,41 +178,40 @@ nnoremap <silent> <leader>z :Goyo<cr>
 
 " ── Format to width ─────────────────────────────────────────
 function! s:FormatToWidth() abort
-  let l:save_tw = &l:textwidth
-  let l:save_fo = &l:formatoptions
-  let l:save_ai = &l:autoindent
-  let l:save_si = &l:smartindent
-  let l:save_ci = &l:cindent
-  let l:save_ie = &l:indentexpr
-  let l:save_et = &l:expandtab
+	let l:save_tw = &l:textwidth
+	let l:save_fo = &l:formatoptions
+	let l:save_ai = &l:autoindent
+	let l:save_si = &l:smartindent
+	let l:save_ci = &l:cindent
+	let l:save_ie = &l:indentexpr
+	let l:save_et = &l:expandtab
 
-  try
-    setlocal textwidth=120
-    setlocal noautoindent nosmartindent nocindent indentexpr=
-    setlocal formatoptions-=2
-    setlocal expandtab
+	try
+		setlocal textwidth=120
+		setlocal noautoindent nosmartindent nocindent indentexpr=
+		setlocal formatoptions-=2
+		setlocal expandtab
 
-    let l:view = winsaveview()
-    silent! keepjumps normal! gggqG
-    call winrestview(l:view)
+		let l:view = winsaveview()
+		silent! keepjumps normal! gggqG
+		call winrestview(l:view)
 
-    silent! keeppatterns %s/\v(\S) {2,}(\S)/\1 \2/ge
-    nohlsearch
-  finally
-    let &l:textwidth     = l:save_tw
-    let &l:formatoptions = l:save_fo
-    let &l:autoindent    = l:save_ai
-    let &l:smartindent   = l:save_si
-    let &l:cindent       = l:save_ci
-    let &l:indentexpr    = l:save_ie
-    let &l:expandtab     = l:save_et
-  endtry
+		silent! keeppatterns %s/\v(\S) {2,}(\S)/\1 \2/ge
+		nohlsearch
+	finally
+		let &l:textwidth	 = l:save_tw
+		let &l:formatoptions = l:save_fo
+		let &l:autoindent	= l:save_ai
+		let &l:smartindent   = l:save_si
+		let &l:cindent	   = l:save_ci
+		let &l:indentexpr	= l:save_ie
+		let &l:expandtab	 = l:save_et
+	endtry
 endfunction
 
 nnoremap <leader>dtw :call <SID>FormatToWidth()<CR>
 
 nnoremap <leader>e :e ~/buffer<cr>
 
-
-
-
+autocmd FileType python xmap <buffer> S <Plug>VgSurround
+autocmd FileType python xmap <buffer> s <Plug>VSurround
