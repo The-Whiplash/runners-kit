@@ -223,7 +223,13 @@ function! MyIndent()
   if prev =~ '[:{]\s*$'
     return indent(v:lnum - 1) + &shiftwidth
   elseif curr =~ '^\s*}'
-    return indent(v:lnum - 1) - &shiftwidth
+    let lnum = v:lnum - 1
+    while lnum > 0
+      if getline(lnum) =~ '{\s*$'
+        return indent(lnum)
+      endif
+      let lnum -= 1
+    endwhile
   endif
   return indent(v:lnum - 1)
 endfunction
