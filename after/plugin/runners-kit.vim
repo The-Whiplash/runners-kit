@@ -179,38 +179,42 @@ nnoremap <silent> <leader>z :Goyo<cr>
 
 " ── Format to width ─────────────────────────────────────────
 function! s:FormatToWidth() abort
-	let l:save_tw = &l:textwidth
-	let l:save_fo = &l:formatoptions
-	let l:save_ai = &l:autoindent
-	let l:save_si = &l:smartindent
-	let l:save_ci = &l:cindent
-	let l:save_ie = &l:indentexpr
-	let l:save_et = &l:expandtab
-
+	let l:saved = {
+		\ 'tw':  &l:textwidth,
+		\ 'fo':  &l:formatoptions,
+		\ 'ai':  &l:autoindent,
+		\ 'si':  &l:smartindent,
+		\ 'ci':  &l:cindent,
+		\ 'ie':  &l:indentexpr,
+		\ 'et':  &l:expandtab,
+		\ 'fex': &l:formatexpr,
+		\ 'fp':  &l:formatprg,
+	\ }
 	try
 		setlocal textwidth=120
 		setlocal noautoindent nosmartindent nocindent indentexpr=
-		setlocal formatoptions-=2
+		setlocal formatoptions=tq
+		setlocal formatexpr= formatprg=
 		setlocal expandtab
-
 		let l:view = winsaveview()
 		silent! keepjumps normal! gggqG
 		call winrestview(l:view)
-
 		silent! keeppatterns %s/\v(\S) {2,}(\S)/\1 \2/ge
 		nohlsearch
 	finally
-		let &l:textwidth	 = l:save_tw
-		let &l:formatoptions = l:save_fo
-		let &l:autoindent	= l:save_ai
-		let &l:smartindent   = l:save_si
-		let &l:cindent	   = l:save_ci
-		let &l:indentexpr	= l:save_ie
-		let &l:expandtab	 = l:save_et
+		let &l:textwidth	 = l:saved.tw
+		let &l:formatoptions = l:saved.fo
+		let &l:autoindent	= l:saved.ai
+		let &l:smartindent   = l:saved.si
+		let &l:cindent	   = l:saved.ci
+		let &l:indentexpr	= l:saved.ie
+		let &l:expandtab	 = l:saved.et
+		let &l:formatexpr	= l:saved.fex
+		let &l:formatprg	 = l:saved.fp
 	endtry
 endfunction
 
-nnoremap <leader>dtw :call <SID>FormatToWidth()<CR>
+nnoremap <silent> <leader>dtw :<C-u>call <SID>FormatToWidth()<CR>
 
 nnoremap <leader>e :e ~/buffer<cr>
 
